@@ -29,7 +29,14 @@ dependencies {
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 	compile('javax.servlet:jstl:1.2')
 	compile("org.springframework.boot:spring-boot-devtools")
+	//redis
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
+	compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+	
+	//codec for base62
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.10' 
+
+	
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
