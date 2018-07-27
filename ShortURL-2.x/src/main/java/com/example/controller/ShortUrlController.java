@@ -29,18 +29,21 @@ public class ShortUrlController {
 		logger.info("request url: " + url);
 
 		String key = redisDao.getKey(url);
-
+		logger.trace("["+getClass().getName()+"]:"+"fist key step :" + key);
 		if (key == null) {
 			try {
 				UrlVO urlVO = mysqlDao.selectUrl(url);
 				key = urlVO.getKey();
-
+				logger.trace("["+getClass().getName()+"]:"+"second key step :" + key);
+				
 				// not found url from mysql database
 			} catch (EmptyResultDataAccessException e) {
-
+				logger.warn("exception occured : " + e.getMessage());
 				mysqlDao.insertUrl(url);
 				UrlVO urlVO = mysqlDao.selectForLastUrl();
 				key = redisDao.saveUrl(urlVO);
+				logger.trace("["+getClass().getName()+"]"+"third key step :" + key);
+				
 			}
 		}
 		StringBuffer buffer = new StringBuffer();
