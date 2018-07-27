@@ -22,7 +22,26 @@ public class MysqlDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public UrlVO selectForLastSeq() {
+	public void insertUrl(String url) {
+		String sql = "INSERT INTO T_SHORTURL(url) VALUES(?)";
+		int update = jdbcTemplate.update(sql, url);
+		
+		logger.info("["+getClass().getName()+"]"+" : " +  " Insert Query =" + sql +", Result =" + update );
+
+	}
+
+	public UrlVO selectUrl(String url) {
+		String sql = "SELECT * FROM T_SHORTURL WHERE URL=?";
+		return jdbcTemplate.queryForObject(sql,new Object[] {url}, new RowMapper<UrlVO>() {
+			@Override
+			public UrlVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				UrlVO urlVO = new UrlVO(rs.getInt(1), rs.getString(2));
+				return urlVO;
+			}
+		});
+	}
+	
+	public UrlVO selectForLastUrl() {
 		String sql = "SELECT * FROM T_SHORTURL ORDER BY SEQ DESC LIMIT 1";
 		return jdbcTemplate.queryForObject(sql, new RowMapper<UrlVO>() {
 			@Override
@@ -32,13 +51,4 @@ public class MysqlDao {
 			}
 		});
 	}
-
-	public void insertUrl(String url) {
-		String sql = "INSERT INTO T_SHORTURL(url) VALUES(?)";
-		int update = jdbcTemplate.update(sql, url);
-		
-		logger.info("["+getClass().getName()+"]"+" : " +  " Insert Query =" + sql +", Result =" + update );
-
-	}
-
 }

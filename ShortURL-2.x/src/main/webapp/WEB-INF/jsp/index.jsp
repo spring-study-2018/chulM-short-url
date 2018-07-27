@@ -19,7 +19,7 @@
 	   $(document).ready(function(){
 	         
 		$("#createUrlBtn").click(function(){
-		  var regex = "^((http(s?))\:\/\/)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$";
+		  var regex = "^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$";
 		  var input = $("#orgUrl").val();
 			var match = input.match(regex);
 			if(match){

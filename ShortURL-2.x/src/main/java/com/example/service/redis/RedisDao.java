@@ -6,11 +6,9 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.example.service.repository.MysqlDao;
 import com.example.utils.Base62Utils;
 import com.example.vo.UrlVO;
 
@@ -22,8 +20,6 @@ public class RedisDao {
 	@Resource(name = "redisTemplate")
 	private RedisTemplate<String, Object> redisTemplate;
 
-	@Autowired
-	private MysqlDao mysqlDao;
 
 	/**
 	 * 
@@ -36,25 +32,20 @@ public class RedisDao {
 		}
 
 		String key = (String) redisTemplate.opsForValue().get(url);
-		if (key == null) {
-			mysqlDao.insertUrl(url);
-			UrlVO urlVO = mysqlDao.selectForLastSeq();
-			key = saveUrl(urlVO);
-		}
 		return key;
 
 	}
 
-	protected String saveUrl(UrlVO urlVO) {
+	public String saveUrl(UrlVO urlVO) {
 		String key = Base62Utils.encode(urlVO.getSeq());
 		urlVO.setKey(key);
-		logger.debug("["+getClass().getName()+"]"+" : " +  " Generate Key = " + key);
+		logger.debug("[" + getClass().getName() + "]" + " : " + " Generate Key = " + key);
 
 		redisTemplate.opsForValue().append(urlVO.getUrl(), urlVO.getKey());
 		// 데이터의 세션 만료는 하루
 		redisTemplate.expire(urlVO.getUrl(), 24, TimeUnit.HOURS);
-		logger.trace("["+getClass().getName()+"]"+" : " +  " save Redis Session");
-		
+		logger.trace("[" + getClass().getName() + "]" + " : " + " save Redis Session");
+
 		return urlVO.getKey();
 	}
 }
