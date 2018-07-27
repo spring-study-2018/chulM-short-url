@@ -19,13 +19,13 @@
 	   $(document).ready(function(){
 	         
 		$("#createUrlBtn").click(function(){
-		  var regex =/^(file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/;
+		  var regex =/^(http|file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/;
 		  var input = $("#orgUrl").val();
 			var match = input.match(regex);
 			if(match){
 			 	
 			 $.ajax({
-	            type : "GET",
+	            type : "POST",
 	            url : "/create",
 	            data : {"url":input},
 	            error : function(){
