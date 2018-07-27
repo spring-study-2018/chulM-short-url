@@ -19,7 +19,7 @@
 	   $(document).ready(function(){
 	         
 		$("#createUrlBtn").click(function(){
-		  var regex = "^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$";
+		  var regex =/^(file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/;
 		  var input = $("#orgUrl").val();
 			var match = input.match(regex);
 			if(match){
