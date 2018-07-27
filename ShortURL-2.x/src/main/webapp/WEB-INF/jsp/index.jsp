@@ -33,7 +33,8 @@
 	            },
 	            success : function(data){
 	                alert("데이터 값 : " + data) ;
-	                
+	                $('#urlField').append("<br>");
+	                $('#urlField').append("create URL: <Strong>"+data+"</Strong>");
 	            }  
 	        });	 		  
 			}else{

@@ -35,7 +35,10 @@ dependencies {
 	
 	//codec for base62
 	compile group: 'commons-codec', name: 'commons-codec', version: '1.10' 
-
+	//jdbc,dbcp,hikaricp
+	compile "org.springframework.boot:spring-boot-starter-jdbc"	
+	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+//	compile group: 'hikari-cp', name: 'hikari-cp', version: '1.8.1'
 	
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
