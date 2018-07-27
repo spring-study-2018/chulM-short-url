@@ -1,5 +1,6 @@
 package com.example.service.redis;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -7,9 +8,12 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import com.example.utils.Base62Utils;
+import com.example.utils.ShortUrlUtils;
 import com.example.vo.UrlVO;
 
 @Configuration
@@ -20,7 +24,7 @@ public class RedisDao {
 	@Resource(name = "redisTemplate")
 	private RedisTemplate<String, Object> redisTemplate;
 
-
+	
 	/**
 	 * 
 	 * @param url(request url)
@@ -30,10 +34,23 @@ public class RedisDao {
 		if (url == null) {
 			return null;
 		}
-
+	
 		String key = (String) redisTemplate.opsForValue().get(url);
 		return key;
 
+	}
+	
+	public String getValue(String shortParam) {
+		ValueOperations<String,Object> values = redisTemplate.opsForValue();
+		Set<String> keys=values.getOperations().keys("*");
+		String linkUrl = null;
+		for (String key : keys) {
+			if(shortParam.equals(values.get(key))) {
+				linkUrl = (String)key;
+				break;
+			}
+		}
+		return linkUrl;
 	}
 
 	public String saveUrl(UrlVO urlVO) {

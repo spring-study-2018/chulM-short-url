@@ -41,6 +41,17 @@ public class MysqlDao {
 		});
 	}
 	
+	public UrlVO selectUrl(int seq) {
+		String sql = "SELECT * FROM T_SHORTURL WHERE seq=?";
+		return jdbcTemplate.queryForObject(sql,new Object[] {seq}, new RowMapper<UrlVO>() {
+			@Override
+			public UrlVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				UrlVO urlVO = new UrlVO(rs.getInt(1), rs.getString(2));
+				return urlVO;
+			}
+		});
+	}
+	
 	public UrlVO selectForLastUrl() {
 		String sql = "SELECT * FROM T_SHORTURL ORDER BY SEQ DESC LIMIT 1";
 		return jdbcTemplate.queryForObject(sql, new RowMapper<UrlVO>() {
