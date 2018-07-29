@@ -58,7 +58,7 @@ public class ShortUrlController {
 		if (key == null) {
 			try {
 				UrlVO urlVO = mysqlDao.selectUrl(url);
-				key = urlVO.getKey();
+				key=Base62Utils.encode(urlVO.getSeq());
 				logger.trace("["+getClass().getName()+"]:"+"second key step :" + key);
 				
 				// not found url from mysql database
