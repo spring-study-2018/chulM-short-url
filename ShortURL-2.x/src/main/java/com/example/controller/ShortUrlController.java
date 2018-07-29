@@ -3,6 +3,7 @@ package com.example.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,12 @@ import com.example.vo.UrlVO;
 
 @Controller
 public class ShortUrlController {
-
+	
+	@Value("${server.address}")
+	public  String HOST;
+	@Value("${server.port}")
+	private String PORT;
+	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
@@ -72,7 +78,7 @@ public class ShortUrlController {
 			}
 		}
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(ShortUrlUtils.HOST).append(ShortUrlUtils.COLON).append(ShortUrlUtils.PORT)
+		buffer.append(HOST).append(ShortUrlUtils.COLON).append(PORT)
 				.append(ShortUrlUtils.SEPERATOR).append(key);
 
 		return buffer.toString();
