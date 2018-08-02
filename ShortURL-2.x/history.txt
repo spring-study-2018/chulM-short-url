@@ -1,3 +1,8 @@
+#2.x.5
+- added netty client
+- mysql, redis service add
+- threadpool class write
+
 #2.x.4
 - url Link
 
@@ -19,7 +24,6 @@
 
 
 ########### TODO
-- change regex shorturl request
-- 클라이언트 코드 및 테스트 
-- Monitoring 
-- Netty 연동  
+- redis bug fix
+- Telnet Monitoring 
+- Change Server base (netty)   

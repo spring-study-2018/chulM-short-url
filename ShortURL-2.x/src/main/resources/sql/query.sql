@@ -6,4 +6,7 @@ CREATE TABLE T_ShortURL(
    url varchar(2000)
 )
 
+
+DROP TABLE T_SHORTURL;
+
 commit;

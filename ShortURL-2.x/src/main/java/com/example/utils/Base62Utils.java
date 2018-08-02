@@ -1,22 +1,21 @@
 package com.example.utils;
 
 /**
- * @see http://rocksea.tistory.com/348
- *  references code
- 
+ * @see http://rocksea.tistory.com/348 references code
+ * 
  */
 public class Base62Utils {
 	/**
 	 * Base62 Character Table
 	 */
-	static final char[] BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+	char[] BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
 	/**
 	 * Base62 Encoding
 	 *
 	 * @return the base 62 string of an integer
 	 */
-	public static String encode(int value) {
+	public String encode(int value) {
 		final StringBuilder sb = new StringBuilder();
 		do {
 			int i = value % 62;
@@ -26,7 +25,7 @@ public class Base62Utils {
 		return sb.toString();
 	}
 
-	public static String encodeToLong(long value) {
+	public String encodeToLong(long value) {
 		final StringBuilder sb = new StringBuilder();
 		do {
 			int i = (int) (value % 62);
@@ -41,7 +40,7 @@ public class Base62Utils {
 	 *
 	 * @return the base 62 value of a string.
 	 */
-	public static int decode(String value) {
+	public int decode(String value) {
 		int result = 0;
 		int power = 1;
 		for (int i = 0; i < value.length(); i++) {
@@ -52,7 +51,7 @@ public class Base62Utils {
 		return result;
 	}
 
-	public static long decodeToLong(String value) {
+	public long decodeToLong(String value) {
 		long result = 0;
 		long power = 1;
 		for (int i = 0; i < value.length(); i++) {

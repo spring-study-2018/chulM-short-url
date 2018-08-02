@@ -54,7 +54,8 @@ public class RedisDao {
 	}
 
 	public String saveUrl(UrlVO urlVO) {
-		String key = Base62Utils.encode(urlVO.getSeq());
+//		String key = Base62Utils.encode(urlVO.getSeq());
+		String key = new Base62Utils().encode(urlVO.getSeq());
 		urlVO.setKey(key);
 		logger.debug("[" + getClass().getName() + "]" + " : " + " Generate Key = " + key);
 

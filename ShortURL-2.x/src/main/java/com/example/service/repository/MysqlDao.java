@@ -22,12 +22,13 @@ public class MysqlDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public void insertUrl(String url) {
+	public int insertUrl(String url) {
 		String sql = "INSERT INTO T_SHORTURL(url) VALUES(?)";
 		int update = jdbcTemplate.update(sql, url);
-		
-		logger.info("["+getClass().getName()+"]"+" : " +  " Insert Query =" + sql +", Result =" + update );
 
+//		logger.info("["+getClass().getName()+"]"+" : " +  " Insert Query =" + sql +", Result =" + update );
+
+		return update;
 	}
 
 	public UrlVO selectUrl(String url) {

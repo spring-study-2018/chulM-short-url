@@ -43,4 +43,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	//netty
+	// https://mvnrepository.com/artifact/io.netty/netty-all
+	compile group: 'io.netty', name: 'netty-all', version: '4.1.25.Final'
+	
 }
