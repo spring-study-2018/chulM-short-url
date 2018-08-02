@@ -2,6 +2,7 @@ package com.example.service.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,9 @@ public class MysqlDao {
 
 	public int insertUrl(String url) {
 		String sql = "INSERT INTO T_SHORTURL(url) VALUES(?)";
-		int update = jdbcTemplate.update(sql, url);
+		Object[] param = {url};
+		int[] type = {Types.VARCHAR};
+		int update = jdbcTemplate.update(sql, param,type);
 
 //		logger.info("["+getClass().getName()+"]"+" : " +  " Insert Query =" + sql +", Result =" + update );
 

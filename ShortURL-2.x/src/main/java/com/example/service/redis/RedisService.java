@@ -33,7 +33,7 @@ public class RedisService {
 			} catch (EmptyResultDataAccessException e) {
 				//
 				int result = mysql.insertUrl(url);
-				UrlVO urlVO = mysql.selectForLastUrl();
+				UrlVO urlVO = mysql.selectUrl(url);
 				key = redisDao.saveUrl(urlVO);
 			}
 		}
